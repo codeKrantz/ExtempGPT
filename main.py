@@ -1,6 +1,7 @@
 from openai import OpenAI
+from docx import Document
 client = OpenAI()
-
+# make prompt and input again but this time check the terminal before running
 article_origin = input("Enter where the artical is from")
 prompt = """Write a summary of the following article from the {ARTICLE}, then create a Conservative political take, a Moderate political take, and a Liberal political take:
 
