@@ -2,6 +2,7 @@ from openai import OpenAI
 from docx import Document
 client = OpenAI()
 # make prompt and input again but this time check the terminal before running
+file_name = input("What should the name of the file be?")
 article_origin = input("Enter where the artical is from")
 prompt = """Write a summary of the following article from the {ARTICLE}, then create a Conservative political take, a Moderate political take, and a Liberal political take:
 
@@ -88,4 +89,9 @@ completion = client.chat.completions.create(
   ]
 )
 
-print(completion.choices[0].message)
+text = str(completion.choices[0].message)
+
+document = Document()
+document.add_heading("Article from: {ARTICLE}".format(ARTICLE=article_origin))
+document.add_paragraph(text)
+document.save("{NAME}.docx".format(NAME=file_name))
